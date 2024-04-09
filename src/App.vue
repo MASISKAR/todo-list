@@ -1,9 +1,9 @@
 <script>
-// import TodoList from './components/TodoList/TodoList.vue'
-// console.log('TodoList', TodoList)
+import TodoList from './components/TodoList/TodoList.vue'
+
 export default {
   components: {
-    // TodoList
+    TodoList
   }
 }
 </script>
