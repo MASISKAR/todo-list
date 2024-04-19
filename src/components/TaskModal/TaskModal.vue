@@ -28,7 +28,13 @@
 
             <v-btn color="warning" text="Close" variant="plain" @click="onClose"></v-btn>
 
-            <v-btn color="success" text="Save" variant="tonal" @click="onSave"></v-btn>
+            <v-btn
+              :disabled="isSaveDisabled"
+              color="success"
+              text="Save"
+              variant="tonal"
+              @click="onSave"
+            ></v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
