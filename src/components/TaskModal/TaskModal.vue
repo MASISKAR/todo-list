@@ -6,7 +6,12 @@
           <v-card-text>
             <v-row dense>
               <v-col cols="12" sm="12">
-                <v-text-field label="Title*" required v-model="title"></v-text-field>
+                <v-text-field
+                  :class="{ invalid: !isTitleValid }"
+                  label="Title*"
+                  required
+                  v-model="title"
+                ></v-text-field>
               </v-col>
 
               <v-col cols="12" sm="12">
@@ -29,7 +34,7 @@
             <v-btn color="warning" text="Close" variant="plain" @click="onClose"></v-btn>
 
             <v-btn
-              :disabled="isSaveDisabled"
+              :disabled="!isTitleValid"
               color="success"
               text="Save"
               variant="tonal"
@@ -43,3 +48,9 @@
 </template>
 
 <script src="./taskModal.js"></script>
+
+<style>
+.invalid .v-input__control {
+  border: 1px solid red;
+}
+</style>

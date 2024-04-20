@@ -1,8 +1,10 @@
 import TaskModal from '../TaskModal/TaskModal.vue'
+import Task from '../Task/Task.vue'
 
 export default {
   components: {
-    TaskModal
+    TaskModal,
+    Task
   },
   data() {
     return {

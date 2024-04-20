@@ -19,6 +19,9 @@ export default {
     }
   },
   methods: {
+    onInput(event) {
+      this.name = event.target.value
+    },
     onClose() {
       this.$emit('close')
     },
@@ -37,8 +40,8 @@ export default {
     }
   },
   computed: {
-    isSaveDisabled() {
-      return !this.title.trim()
+    isTitleValid() {
+      return !!this.title.trim()
     }
   }
 }
