@@ -2,7 +2,7 @@
   <template>
     <div class="pa-4 text-center">
       <v-dialog :modelValue="isOpen" @update:modelValue="onClose" max-width="600">
-        <v-card prepend-icon="mdi-account" title="Add new task">
+        <v-card prepend-icon="mdi-account" :title="modalTitle">
           <v-card-text>
             <v-row dense>
               <v-col cols="12" sm="12">
@@ -13,7 +13,6 @@
                   v-model="title"
                 ></v-text-field>
               </v-col>
-
               <v-col cols="12" sm="12">
                 <v-textarea label="Description" v-model="description"></v-textarea>
               </v-col>
