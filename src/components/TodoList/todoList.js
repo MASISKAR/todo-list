@@ -21,7 +21,6 @@ export default {
   },
   watch: {
     editingTask(newValue) {
-      console.log('eitingtask new value', newValue)
       if (newValue) {
         this.isTaskModalOpen = true
       }
@@ -54,25 +53,49 @@ export default {
         })
         .catch(this.handleError)
     },
-    onTaskSave(editedTask) {
-      console.log('editedTask', editedTask)
+    onTaskStatusChange(editedTask) {
       taskApi
         .updateTask(editedTask)
         .then((updatedTask) => {
-          // find and replace the task
-          // use findIndex  this.tasks  task._id === updatedTask._id
-          // this.tasks[index] = updatedTask
-          // close the task modal
+          this.findAndReplaceTask(updatedTask)
+          let message
+          if (updatedTask.status === 'done') {
+            message = 'Congratulations, the task is done!'
+          } else {
+            message = 'You have successfully restored the task!'
+          }
+          this.$toast.success(message)
+        })
+        .catch(this.handleError)
+    },
+    onTaskSave(editedTask) {
+      taskApi
+        .updateTask(editedTask)
+        .then((updatedTask) => {
+          this.findAndReplaceTask(updatedTask)
+          this.isTaskModalOpen = false
           this.$toast.success('The task have been updated successfully!')
         })
         .catch(this.handleError)
+    },
+    findAndReplaceTask(updatedTask) {
+      const index = this.tasks.findIndex((t) => t._id === updatedTask._id)
+      this.tasks[index] = updatedTask
     },
     handleError(error) {
       this.$toast.error(error.message)
     },
     onTaskEdit(editingTask) {
-      console.log('taskedit')
       this.editingTask = editingTask
+    },
+    onTaskDelete(taskId) {
+      taskApi
+        .deleteTask(taskId)
+        .then(() => {
+          this.tasks = this.tasks.filter((t) => t._id !== taskId)
+          this.$toast.success('The task have been deleted successfully!')
+        })
+        .catch(this.handleError)
     }
   }
 }

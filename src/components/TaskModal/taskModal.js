@@ -20,19 +20,17 @@ export default {
     }
   },
   created() {
-    console.log(this.editingTask)
     if (this.editingTask) {
-      this.title = this.editingTask.title
-      this.description = this.editingTask.description
-      this.dueDate = new Date(this.editingTask.date)
+      const { title, description, date } = this.editingTask
+      this.title = title
+      this.description = description
+      this.dueDate = date ? new Date(date) : ''
     }
   },
+  mounted() {
+    this.$refs.title.focus()
+  },
   methods: {
-    // onInput(event) {
-    //   this.name = event.target.value
-    //   this.$set(this, 'name', event.target.value)
-    //   this.$set(this.task, 'title', 'dsfsdfsdfsdf')
-    // },
     onClose() {
       this.$emit('close')
     },
@@ -41,9 +39,13 @@ export default {
         title: this.title.trim(),
         description: this.description
       }
+      console.log(this.dueDate)
       if (this.dueDate) {
         task.date = this.dueDate.toISOString().slice(0, 10)
+      } else {
+        task.date = ''
       }
+
       if (this.editingTask) {
         this.$emit('taskSave', {
           ...this.editingTask,
@@ -53,9 +55,6 @@ export default {
       }
 
       this.$emit('taskAdd', task)
-    },
-    onTitleInput(event) {
-      this.title = event.target.value
     }
   },
   computed: {
