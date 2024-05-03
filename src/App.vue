@@ -1,16 +1,19 @@
 <script>
-import TodoList from './components/TodoList/TodoList.vue'
+import Header from './components/Header/Header.vue'
+import Footer from './components/Footer/Footer.vue'
 
 export default {
   components: {
-    TodoList
+    HeaderComponent: Header,
+    FooterComponent: Footer
   }
 }
 </script>
 
 <template>
+  <HeaderComponent />
   <main>
-    <todo-list />
+    <RouterView />
   </main>
+  <FooterComponent />
 </template>
-./components/TodoList/TodoList.vue
