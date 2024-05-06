@@ -1,23 +1,18 @@
 <template>
-  <v-card class="mx-auto my-8" elevation="16" width="auto">
+  <v-card v-if="task" class="mx-auto my-8" elevation="16" width="auto">
     <v-card-item>
-      <v-checkbox></v-checkbox>
-      <v-card-title> {{ data.title }} </v-card-title>
+      <v-card-title> {{ task.title }} </v-card-title>
     </v-card-item>
 
     <v-card-text>
-      {{ data.description }}
+      {{ task.description }}
     </v-card-text>
 
-    <v-card-text> Status: {{ data.status }} </v-card-text>
+    <v-card-text> Status: {{ task.status }} </v-card-text>
 
     <v-card-text> Created at: {{ createdAt }} </v-card-text>
 
     <v-card-text> Due date: {{ dueDate }} </v-card-text>
-
-    <v-card-text>
-      <RouterLink :to="`/task/${data._id}`">Show more...</RouterLink>
-    </v-card-text>
 
     <v-card-actions>
       <v-btn color="success" variant="elevated">
@@ -31,6 +26,7 @@
       </v-btn>
     </v-card-actions>
   </v-card>
+  <h4 v-else>Task not found!</h4>
 </template>
 
-<script src="./task.js"></script>
+<script src="./singleTask.js"></script>
