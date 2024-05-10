@@ -1,11 +1,16 @@
 import TaskApi from '../../../utils/taskApi.js'
+import TaskModal from '../../TaskModal/TaskModal.vue'
 
 const taskApi = new TaskApi()
 
 export default {
+  components: {
+    TaskModal
+  },
   data() {
     return {
-      task: null
+      task: null,
+      isEditModalOpen: false
     }
   },
   created() {
@@ -20,6 +25,9 @@ export default {
     }
   },
   methods: {
+    toggleTaskModal() {
+      this.isEditModalOpen = !this.isEditModalOpen
+    },
     getTask() {
       const taskId = this.$route.params.taskId
       taskApi
@@ -29,8 +37,19 @@ export default {
         })
         .catch(this.handleError)
     },
-    onEdit() {},
-    onDelete() {},
+    onSave(updatedTask) {
+      console.log('updatedTask', updatedTask)
+    },
+    onDelete() {
+      const taskId = this.task._id
+      taskApi
+        .deleteTask(taskId)
+        .then(() => {
+          this.$router.push('/')
+          this.$toast.success('The task have been deleted successfully!')
+        })
+        .catch(this.handleError)
+    },
     handleError(error) {
       this.$toast.error(error.message)
     }

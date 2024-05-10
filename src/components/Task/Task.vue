@@ -5,7 +5,7 @@
       <v-card-title> {{ data.title }} </v-card-title>
     </v-card-item>
 
-    <v-card-text>
+    <v-card-text class="description">
       {{ data.description }}
     </v-card-text>
 
@@ -34,3 +34,10 @@
 </template>
 
 <script src="./task.js"></script>
+<style scoped>
+.description {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+</style>
