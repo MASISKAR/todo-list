@@ -3,6 +3,10 @@ export default {
     data: {
       type: Object,
       required: true
+    },
+    isSelected: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -19,6 +23,16 @@ export default {
     },
     onDelete() {
       this.$emit('taskDelete')
+    },
+    onSelect() {
+      this.$emit('taskSelect')
+    },
+    onStatusChange(status) {
+      const updatedTask = {
+        ...this.data,
+        status
+      }
+      this.$emit('statusChange', updatedTask)
     }
   }
 }
